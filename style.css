@@ -1,0 +1,46 @@
+body {
+  margin: 0px;
+  background-image: url("image/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: "Rajdhani", sans-serif;
+}
+
+.container {
+  background-color: white;
+  min-height: 100vh;
+  max-width: 800px;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
+
+.task-area {
+  border: 1px solid lightgray;
+}
+
+.task-tabs {
+  display: flex;
+  border-bottom: 1px solid lightgray;
+  position: relative;
+}
+
+.task-tabs div {
+  padding: 1em;
+  cursor: pointer;
+}
+
+#under-line {
+  background-color: lightpink;
+  height: 4px;
+  position: absolute;
+  top: 52px;
+  left: 0px;
+  width: 48px;
+  padding: 0px;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+  padding: 1em;
+}
