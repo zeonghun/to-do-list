@@ -11,6 +11,7 @@ body {
   min-height: 100vh;
   max-width: 800px;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  padding-top: 20px;
 }
 
 .task-area {
@@ -34,7 +35,7 @@ body {
   position: absolute;
   top: 52px;
   left: 0px;
-  width: 48px;
+  width: 64px;
   padding: 0px;
 }
 
@@ -43,4 +44,20 @@ body {
   justify-content: space-between;
   border-bottom: 1px solid lightgray;
   padding: 1em;
+}
+
+#task-input{
+  width: 80%;
+  border: 1px solid blanchedalmond;
+}
+
+#add-button{
+  background-color: blanchedalmond;
+  border: none;
+  margin-left: 3px;
+}
+
+.input-area{
+  padding-top: 10px;
+  padding-bottom: 15px;
 }
