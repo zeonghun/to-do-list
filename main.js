@@ -6,28 +6,65 @@
 // '진행중' 탭을 누르면 완료되지 않은 아이템이 출력된다.
 // '완료' 탭을 누르면 완료된 아이템이 출력된다.
 
-let taskInput=document.getElementById("task-input");
-let addButton=document.getElementById("add-button");
-let taskList=[]
-addButton.addEventListener("click",addTask);
+let taskInput = document.getElementById("task-input");
+let addButton = document.getElementById("add-button");
+let taskList = [];
+addButton.addEventListener("click", addTask);
 
-function addTask(){ // 할일을 추가
-    let taskContent=taskInput.value;
-    taskList.push(taskContent);
-    console.log(taskList);
-    render();
+taskInput.addEventListener("focus", function () {
+  taskInput.value = "";
+});
+
+function addTask() {
+  // 할일을 추가
+  let task = {
+    id: randomIDGenerator(), // 각각의 아이템을 구별하기 위해 id 정의
+    taskContent: taskInput.value,
+    isComplete: false,
+  };
+  taskList.push(task);
+  console.log(taskList);
+  render();
 }
 
-function render(){  // 추가된 할일을 출력
-    let resultHTML='';
-    for(let i=0; i<taskList.length; i++){
-        resultHTML += `<div class="task">
-        <div>${taskList[i]}</div>
-        <div>
-          <button>Check</button>
-          <button>Delete</button>
+function render() {
+  // task-board 출력
+  let resultHTML = "";
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i].isComplete == true) {
+      resultHTML += `<div class="task">
+        <div class="task-done">${taskList[i].taskContent}</div>
+        <div class="button-box">
+          <button onclick="toggleComplete('${taskList[i].id}')"><i class="fa-solid fa-check"></i></button>
+          <button onclick="deleteTask()"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>`;
+    } else {
+      resultHTML += `<div class="task">
+        <div>${taskList[i].taskContent}</div>
+        <div class="button-box">
+          <button onclick="toggleComplete('${taskList[i].id}')"><i class="fa-solid fa-check"></i></button>
+          <button onclick="deleteTask()"><i class="fa-solid fa-trash"></i></button>
         </div>
       </div>`;
     }
-    document.getElementById("task-board").innerHTML=resultHTML
+  }
+  document.getElementById("task-board").innerHTML = resultHTML;
+}
+
+function toggleComplete(id) {
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i].id == id) {
+      taskList[i].isComplete = !taskList[i].isComplete;
+      break;
+    }
+  }
+  render();
+}
+
+function deleteTask() {}
+
+function randomIDGenerator() {
+  // task 객체에 랜덤한 id 부여
+  return "_" + Math.random().toString(36).substr(2, 9);
 }

@@ -3,7 +3,6 @@ body {
   background-image: url("image/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: "Rajdhani", sans-serif;
 }
 
 .container {
@@ -11,17 +10,18 @@ body {
   min-height: 100vh;
   max-width: 800px;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-  padding-top: 20px;
+  padding: 20px;
 }
 
 .task-area {
-  border: 1px solid lightgray;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  position: relative;
 }
 
 .task-tabs {
   display: flex;
-  border-bottom: 1px solid lightgray;
-  position: relative;
+  border-bottom: 2px solid lightgray;
 }
 
 .task-tabs div {
@@ -30,7 +30,7 @@ body {
 }
 
 #under-line {
-  background-color: lightpink;
+  background-color: #ffe274;
   height: 4px;
   position: absolute;
   top: 52px;
@@ -43,21 +43,56 @@ body {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid lightgray;
+  width: 100%;
   padding: 1em;
+  position: relative;
 }
 
-#task-input{
-  width: 80%;
-  border: 1px solid blanchedalmond;
+#task-input {
+  width: 91%;
+  border: 2px solid #ffe274;
+  padding-left: 10px;
+  height: 50px;
+  border-radius: 5px;
 }
 
-#add-button{
+#task-input:focus {
+  outline: none;
+}
+
+#add-button {
   background-color: blanchedalmond;
   border: none;
-  margin-left: 3px;
+  margin-left: 5px;
+  height: 50px;
+  width: 7%;
+  border-radius: 5px;
 }
 
-.input-area{
+#add-button:hover {
+  background-color: #ffe274;
+}
+
+.input-area {
   padding-top: 10px;
   padding-bottom: 15px;
+}
+
+.fa-check {
+  color: limegreen;
+}
+
+.fa-trash {
+  color: red;
+}
+
+.button-box button {
+  border: none;
+  width: 5em;
+  margin: 0px;
+  background-color: white;
+}
+
+.task-done {
+  text-decoration: line-through;
 }
