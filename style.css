@@ -86,6 +86,10 @@ body {
   color: red;
 }
 
+.fa-undo-alt {
+  color: lightslategray;
+}
+
 .button-box button {
   border: none;
   width: 5em;
@@ -95,4 +99,5 @@ body {
 
 .task-done {
   text-decoration: line-through;
+  background-color: lightgray;
 }

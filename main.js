@@ -35,8 +35,8 @@ function render() {
       resultHTML += `<div class="task">
         <div class="task-done">${taskList[i].taskContent}</div>
         <div class="button-box">
-          <button onclick="toggleComplete('${taskList[i].id}')"><i class="fa-solid fa-check"></i></button>
-          <button onclick="deleteTask()"><i class="fa-solid fa-trash"></i></button>
+          <button onclick="toggleComplete('${taskList[i].id}')"><i class="fas fa-undo-alt"></i></button>
+          <button onclick="deleteTask('${taskList[i].id}')"><i class="fa-solid fa-trash"></i></button>
         </div>
       </div>`;
     } else {
@@ -44,7 +44,7 @@ function render() {
         <div>${taskList[i].taskContent}</div>
         <div class="button-box">
           <button onclick="toggleComplete('${taskList[i].id}')"><i class="fa-solid fa-check"></i></button>
-          <button onclick="deleteTask()"><i class="fa-solid fa-trash"></i></button>
+          <button onclick="deleteTask('${taskList[i].id}')"><i class="fa-solid fa-trash"></i></button>
         </div>
       </div>`;
     }
@@ -62,7 +62,15 @@ function toggleComplete(id) {
   render();
 }
 
-function deleteTask() {}
+function deleteTask(id) {
+  for (let i = 0; i < taskList.length; i++) {
+    if (taskList[i].id == id) {
+      taskList.splice(i, 1);
+      break;
+    }
+  }
+  render();
+}
 
 function randomIDGenerator() {
   // task 객체에 랜덤한 id 부여
