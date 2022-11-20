@@ -8,8 +8,23 @@
 
 let taskInput = document.getElementById("task-input");
 let addButton = document.getElementById("add-button");
+let tabs = document.querySelectorAll(".task-tabs div");
 let taskList = [];
+let filterList = [];
+let mode = "tab-all";
+
 addButton.addEventListener("click", addTask);
+taskInput.addEventListener("keyup", function (event) {
+  if (event.key === 'Enter') {
+    addTask(event);
+  }
+});
+
+for (let i = 1; i < tabs.length; i++) {
+  tabs[i].addEventListener("click", function (event) {
+    filter(event);
+  });
+}
 
 taskInput.addEventListener("focus", function () {
   taskInput.value = "";
@@ -23,28 +38,33 @@ function addTask() {
     isComplete: false,
   };
   taskList.push(task);
-  console.log(taskList);
   render();
 }
 
 function render() {
   // task-board 출력
   let resultHTML = "";
-  for (let i = 0; i < taskList.length; i++) {
-    if (taskList[i].isComplete == true) {
+  list = [];
+  if (mode == "tab-all") {
+    list = taskList;
+  } else if (mode == "tab-not-done" || mode=="tab-done") {
+    list = filterList;
+  }
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].isComplete == true) {
       resultHTML += `<div class="task">
-        <div class="task-done">${taskList[i].taskContent}</div>
+        <div class="task-done">${list[i].taskContent}</div>
         <div class="button-box">
-          <button onclick="toggleComplete('${taskList[i].id}')"><i class="fas fa-undo-alt"></i></button>
-          <button onclick="deleteTask('${taskList[i].id}')"><i class="fa-solid fa-trash"></i></button>
+          <button onclick="toggleComplete('${list[i].id}')"><i class="fas fa-undo-alt"></i></button>
+          <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash"></i></button>
         </div>
       </div>`;
     } else {
       resultHTML += `<div class="task">
-        <div>${taskList[i].taskContent}</div>
+        <div>${list[i].taskContent}</div>
         <div class="button-box">
-          <button onclick="toggleComplete('${taskList[i].id}')"><i class="fa-solid fa-check"></i></button>
-          <button onclick="deleteTask('${taskList[i].id}')"><i class="fa-solid fa-trash"></i></button>
+          <button onclick="toggleComplete('${list[i].id}')"><i class="fa-solid fa-check"></i></button>
+          <button onclick="deleteTask('${list[i].id}')"><i class="fa-solid fa-trash"></i></button>
         </div>
       </div>`;
     }
@@ -67,6 +87,25 @@ function deleteTask(id) {
     if (taskList[i].id == id) {
       taskList.splice(i, 1);
       break;
+    }
+  }
+  render();
+}
+
+function filter(event) {
+  mode = event.target.id; // 클릭한 tab을 mode에 저장
+  filterList = [];
+  if (mode == "tab-not-done") {
+    for (let i = 0; i < taskList.length; i++) {
+      if (taskList[i].isComplete == false) {
+        filterList.push(taskList[i]);
+      }
+    }
+  } else if (mode == "tab-done") {
+    for (let i = 0; i < taskList.length; i++) {
+      if (taskList[i].isComplete == true) {
+        filterList.push(taskList[i]);
+      }
     }
   }
   render();
