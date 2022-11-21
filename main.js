@@ -1,13 +1,6 @@
-// 유저가 값을 입력한다.
-// '+' 버튼을 누르면 할일이 추가된다.
-// 'delete' 버튼을 누르면 할일이 삭제된다.
-// 'check' 버튼을 누르면 할일이 완료되고 밑줄이 쳐진다.
-// '진행중', '완료' 탭을 누르면 언더바가 이동한다.
-// '진행중' 탭을 누르면 완료되지 않은 아이템이 출력된다.
-// '완료' 탭을 누르면 완료된 아이템이 출력된다.
-
 let taskInput = document.getElementById("task-input");
 let addButton = document.getElementById("add-button");
+let underLine = document.getElementById("under-line");
 let tabs = document.querySelectorAll(".task-tabs div");
 let taskList = [];
 let filterList = [];
@@ -15,7 +8,7 @@ let mode = "tab-all";
 
 addButton.addEventListener("click", addTask);
 taskInput.addEventListener("keyup", function (event) {
-  if (event.key === 'Enter') {
+  if (event.key === "Enter") {
     addTask(event);
   }
 });
@@ -47,7 +40,7 @@ function render() {
   list = [];
   if (mode == "tab-all") {
     list = taskList;
-  } else if (mode == "tab-not-done" || mode=="tab-done") {
+  } else if (mode == "tab-not-done" || mode == "tab-done") {
     list = filterList;
   }
   for (let i = 0; i < list.length; i++) {
@@ -79,7 +72,7 @@ function toggleComplete(id) {
       break;
     }
   }
-  render();
+  filter();
 }
 
 function deleteTask(id) {
@@ -89,11 +82,17 @@ function deleteTask(id) {
       break;
     }
   }
-  render();
+  filter();
 }
 
 function filter(event) {
-  mode = event.target.id; // 클릭한 tab을 mode에 저장
+  if (event) {
+    mode = event.target.id; // 클릭한 tab을 mode에 저장
+    underLine.style.width = event.target.offsetWidth + "px";
+    underLine.style.left = event.target.offsetLeft + "px";
+    underLine.style.top = event.target.offsetTop + (event.target.offsetHeight - 4) + "px";
+  }
+
   filterList = [];
   if (mode == "tab-not-done") {
     for (let i = 0; i < taskList.length; i++) {
