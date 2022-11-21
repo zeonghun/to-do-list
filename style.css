@@ -11,6 +11,8 @@ body {
   max-width: 800px;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
   padding: 20px;
+  border-top: 16px solid blanchedalmond;
+  border-bottom: 16px solid blanchedalmond;
 }
 
 .task-area {
